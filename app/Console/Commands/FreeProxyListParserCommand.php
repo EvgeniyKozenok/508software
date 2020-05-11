@@ -87,6 +87,8 @@ class FreeProxyListParserCommand extends Command
         if (FreeProxyObserverList::$result) {
             Parser::insert(FreeProxyObserverList::$result);
         }
+        echo "parse complete" . PHP_EOL;
+        exit;
     }
 
 }
