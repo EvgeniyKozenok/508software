@@ -15,6 +15,7 @@ class FreeProxyObserverPagination extends CrawlObserver
     const DEFAULT_PAGINATION_NOT_FOUND_PAGE = 1;
 
     static $lastPaginationPage = null;
+    static $maxRepeats = 5;
 
     /**
      * @inheritDoc
@@ -25,6 +26,11 @@ class FreeProxyObserverPagination extends CrawlObserver
         $trNodes = FreeProxyListParserHelper::getTrNodes($response, $dom);
 
         if ($trNodes->count() == 30) { // Browsershot don't select necessary rows - try repeat
+            self::$maxRepeats--;
+            if (!self::$maxRepeats--) {
+                echo 'Repeat later';
+                exit;
+            }
             return false;
         }
 

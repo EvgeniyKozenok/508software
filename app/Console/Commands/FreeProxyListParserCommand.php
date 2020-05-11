@@ -40,13 +40,22 @@ class FreeProxyListParserCommand extends Command
      */
     public function handle()
     {
+        echo "checking pagination..." . PHP_EOL;
         while (!FreeProxyObserverPagination::$lastPaginationPage) {
             FreeProxyListParser::parse(FreeProxyObserverPagination::class);
         }
 
         $pageId = 0;
         $lastPaginationPage = FreeProxyObserverPagination::$lastPaginationPage;
+
+        echo "main parse start..." . PHP_EOL;
+
         while($pageId < $lastPaginationPage) {
+            if ($pageId) {
+                echo "parse {$pageId} page..." . PHP_EOL;
+            } else {
+                echo "parse first page..." . PHP_EOL;
+            }
             FreeProxyListParser::parse(FreeProxyObserverList::class, $pageId);
 
             $currentCountRows = count(FreeProxyObserverList::$result);

@@ -27,6 +27,7 @@ class FreeProxyObserverList extends CrawlObserver
     {
         $trNodes = FreeProxyListParserHelper::getTrNodes($response);
         if (!self::$paginateRequest && $trNodes->count() == 30) { // Browsershot don't select necessary rows - try repeat
+            echo "Browsershot don\'t select necessary rows - try repeat...";
             return false;
         }
 

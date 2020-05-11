@@ -14,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    (new \App\Console\Commands\FreeProxyListParserCommand())->handle();
-    dd((new \App\Console\Commands\FreeProxyListParserCommand())->handle());
     return view('welcome');
 });
